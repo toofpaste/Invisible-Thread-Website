@@ -25,7 +25,7 @@ export default function useYScroll(bounds, props) {
 
   const Stage2 = () => {
     setPositionSpring({ positionSpring: [0, 0, 5], config: { easing: easeQuadInOut, duration: 2000 } })
-    setRotationSpring({ rotationSpring: [-90, 0, 180], config: { easing: easeQuadInOut, duration: 2000 } })
+    setRotationSpring({ rotationSpring: [-90, 0, 0], config: { easing: easeQuadInOut, duration: 2000 } })
   }
 
   const Stage3 = () => {
@@ -89,7 +89,7 @@ export default function useYScroll(bounds, props) {
   // }
 
   useEffect(() => {
-    // startAnimationDown();
+    startAnimationDown();
   }, )
 
   const setScrollDown = e => {
@@ -97,42 +97,42 @@ export default function useYScroll(bounds, props) {
     const max = 5
     // if (pos > 1 && pos < max) {
     //   if (moveUp) {
-    //     setScrollSpring(0)        
+    //     setScrollSpring(0)
     //     setRotationSpring({ rotationSpring: 0 })
     //   } else {
-    //     setScrollSpring(max + max * 0.1)        
+    //     setScrollSpring(max + max * 0.1)
     //     setRotationSpring({ rotationSpring : -90 })
     //   }
     // }
     // setPositionSpring({ positionSpring: [0, pos, 5]})
 
-    // if (pos > max) {
-    //   moveUp = true;
-    // }
-    // if (pos < 1) {
-    //   moveUp = false;
-    // }
+    if (pos > max) {
+      moveUp = true;
+    }
+    if (pos < 1) {
+      moveUp = false;
+    }
 
-    // if (pos >= 0 && pos <= 4.5) {
+    if (pos >= 0 && pos <= 4.5) {
 
-    // } else if (pos > 4.5 && pos <= 5) {
-    //   setPositionSpring({
-    //     positionSpring: [0, 0, 5], config: {
-    //       delay: 300,
-    //       mass: 200,
-    //       velocity: 0,
-    //       tension: 80,
-    //       friction: 300
-    //     }
-    //   })     
-    // } else if (pos > 5) {
-    //   setPositionSpring({ positionSpring: [0, pos, 5] })
-    // }
+    } else if (pos > 4.5 && pos <= 5) {
+      setPositionSpring({
+        positionSpring: [0, 0, 5], config: {
+          delay: 300,
+          mass: 200,
+          velocity: 0,
+          tension: 80,
+          friction: 300
+        }
+      })
+    } else if (pos > 5) {
+      setPositionSpring({ positionSpring: [0, pos, 5] })
+    }
 
 
-    // console.log(pos);
+    console.log(pos);
 
-    // lock = (pos > 1 && pos < max);
+    lock = (pos > 1 && pos < max);
   }
 
 

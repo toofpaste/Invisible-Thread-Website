@@ -4,6 +4,7 @@ import { useSpring, a } from 'react-spring/three'
 import data from '../data'
 import { Vector3 } from 'three/src/Three';
 import { GetRandom } from './HelperFuncitons'
+import ContactForm from './ContactForm'
 
 //Image object
 export function Images({ top, mouse, scrollMax, snap, imageLoader }) {
@@ -48,7 +49,8 @@ export function Images({ top, mouse, scrollMax, snap, imageLoader }) {
         
     let startPosition = [x, y, z]
     return [startPosition, material];
-  }), [data])  
+  }), [data])
+
 
   return imageList.map(([[x, y, z], material], index) => (
     <Image
@@ -125,25 +127,28 @@ export function Image({ url, opacity, startPosition, material, selected, selectI
   // const mat = new THREE.MeshBasicMaterial({color: 'blue'});
 
   return (
-    <a.mesh {...props}
-      position={position.interpolate((x, y, z) => [x, y, z], 0.1)}
-      onPointerUp={toggle}
-      // onPointerOver={hover} onPointerOut={unhover}
-      scale={[sx, sy, 1]}
-      material={material} 
-      frustumCulled={false}
-      onAfterRender={() => {
-        this.frustumCulled = true;
-        this.onAfterRender = function(){};
-      }}
-      >
-      {/* <planeBufferGeometry attach="geometry" args={[5, 5]} /> */}
-      <planeGeometry attach="geometry" args={[1, 1, 1]} />
-      {/* <a.meshBasicMaterial attach="material" args={texture} /> */}
-      {/* <a.meshLambertMaterial attach="material" transparent opacity={opacity}>
-        <primitive attach="map" object={texture} />
-      </a.meshLambertMaterial> */}
-    </a.mesh>
+      <>
+        <a.mesh {...props}
+          position={position.interpolate((x, y, z) => [x, y, z], 0.1)}
+          onPointerUp={toggle}
+          // onPointerOver={hover} onPointerOut={unhover}
+          scale={[sx, sy, 1]}
+          material={material}
+          frustumCulled={false}
+          onAfterRender={() => {
+            this.frustumCulled = true;
+            this.onAfterRender = function(){};
+          }}
+          >
+          {/* <planeBufferGeometry attach="geometry" args={[5, 5]} /> */}
+          <planeGeometry attach="geometry" args={[2, 1, 1]} />
+          {/* <a.meshBasicMaterial attach="material" args={texture} /> */}
+          {/* <a.meshLambertMaterial attach="material" transparent opacity={opacity}>
+            <primitive attach="map" object={texture} />
+          </a.meshLambertMaterial> */}
+        </a.mesh>
+        {/*<ContactForm/>*/}
+      </>
   )
 }
 

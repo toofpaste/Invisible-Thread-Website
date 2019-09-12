@@ -20,8 +20,8 @@ export default function ContactForm() {
 
       var object = new CSS3DObject(element);
       object.position.x = 0;
-      object.position.y = -20;
-      object.position.z = 0;
+      object.position.y = -75;
+      object.position.z = 5;
       object.rotation.x = THREE.Math.degToRad(-90);
       // object.rotation.x = Math.random();
       // object.rotation.y = Math.random();

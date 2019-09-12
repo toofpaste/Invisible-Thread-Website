@@ -8,9 +8,9 @@ export default function ContactFormElement() {
       <div id={'contact-form'} className={'panel-3d'}>
 
         <div className="nav">
-          {/* <a href="#" className="menu-activator"><i className="ion-ios-more"></i></a>*/}
-          {/* <img src={logoPngBlk} style={{ width: '250px' }} /> */}
-          {/* <a href="#" className="white link"><i className="ion-ios-redo-outline"></i><i className="ion-ios-redo hidden"></i></a>*/}
+           {/*<a href="#" className="menu-activator"><i className="ion-ios-more"></i></a>*/}
+           <img src={logoPngBlk} style={{ marginLeft: '15%', float: 'left', paddingTop: '25%', width: '25%' }} />
+           <a href="#" className="white link"><i className="ion-ios-redo-outline"></i><i className="ion-ios-redo hidden"></i></a>
         </div>
         <div className="container">
           <div className="inner">
