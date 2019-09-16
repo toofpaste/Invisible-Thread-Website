@@ -19,11 +19,13 @@ import ContactForm from './sceneElements/ContactForm'
 import { Vector3, Camera, SpotLight } from 'three/src/Three';
 import ImageLoader from './helpers/ImageLoader'
 import data from './data'
-
+import Text from "./sceneElements/Text";
 import { EffectComposer } from './postprocessing/EffectComposer'
 import { RenderPass } from './postprocessing/RenderPass'
 import { GlitchPass } from './postprocessing/GlitchPass'
 import { WaterPass } from './postprocessing/WaterPass'
+import {AfterimagePass} from "./postprocessing/AfterImagePass";
+import { ShaderPass } from "./postprocessing/ShaderPass";
 
 applySpring({ EffectComposer, RenderPass, GlitchPass, WaterPass })
 applyThree({ EffectComposer, RenderPass, GlitchPass, WaterPass })
@@ -79,6 +81,7 @@ function Scene({ imageLoader, mouse, cameraControl: { positionSpring, scrollSpri
 
   const snap = useCallback((snapTo, newY) => {
     if (snapTo) {
+
       setScroll(-(newY + 2.5));
       setSnapped(true);
     } else {
@@ -142,7 +145,8 @@ function Scene({ imageLoader, mouse, cameraControl: { positionSpring, scrollSpri
       <Effects factor={scrollSpring.interpolate([0, 150], [1, 0])} />
 
        <Logo top={scrollSpring} />
-      <Stars2 position={[0, 0, -50]} depthTest={false} scrollSpring={scrollSpring} />
+
+      <Stars2 position={[0, 0, -10]} depthTest={false} scrollSpring={scrollSpring} />
 
       <Images top={scrollSpring} mouse={mouse} scrollMax={scrollMax} snap={snap} imageLoader={imageLoader} />
       {/* <Stars position={[0, 0, 0]} /> */}
@@ -156,9 +160,10 @@ function Scene({ imageLoader, mouse, cameraControl: { positionSpring, scrollSpri
       {/*<Background color={mouse.interpolate([0, 0, -50], ['#27282F', '#247BA0', '#70C1B3', '#f8f3f1'])} />*/}
 
       <ContactForm/>
-      {/* <Text opacity={1} fontSize={210} >
-        Invisible Thread
-      </Text> */}
+      {/*<Text position={[0,-4.3,0]} opacity={1} fontSize={110}>*/}
+      {/*  Scroll Down For More*/}
+      {/*</Text>*/}
+
       {/* <Text opacity={1} position={top.interpolate(top => [0, -20 + ((top * 10) / scrollMax) * 2, 0])} fontSize={150}>
         Ipsum
       </Text> */}
@@ -178,14 +183,16 @@ const Effects = React.memo(({ factor }) => {
     <effectComposer ref={composer} args={[gl]}>
       {/* Main Pass that renders the Scene */}
       <renderPass attachArray="passes" args={[scene, camera]} />
+      {/*<afterImagePass attachArray="passes" factor={1} renderToScreen />*/}
        {/*<a.waterPass attachArray="passes" factor={1} renderToScreen />*/}
-
+       {/*   <a.ShaderPass attachArray="passes" factor={1} renderToScreen />*/}
        {/*<a.unrealBloomPass attachArray="passes" factor={1} renderToScreen />*/}
       {/* Effect Passes renderToScreen draws current pass to screen*/}
       <a.glitchPass attachArray="passes" renderToScreen factor={factor} />
     </effectComposer>
   )
 })
+
 function Stars2({ position }) {
   let group = useRef()
   let theta = 0

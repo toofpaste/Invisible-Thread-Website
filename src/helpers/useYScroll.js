@@ -29,6 +29,7 @@ export default function useYScroll(bounds, props) {
   }));
 
   const Stage1 = () => {
+    FormHide();
     lock = true;
     setPositionSpring({ positionSpring: [0, -5, 20], config: { easing: easeQuadInOut, duration: 4000 } })
     setRotationSpring({ rotationSpring: [-10, 0, 0], config: { easing: easeQuadInOut, duration: 2000 } })
@@ -43,13 +44,16 @@ export default function useYScroll(bounds, props) {
     }, 2000)
   }
   const Stage4 = () => {
+    //FormHide();
+    FormShow();
     // console.log("start rotation")
     lock = true;
     // setPositionSpring({ positionSpring: [0, 10, 0], config: { easing: easeQuadInOut, duration: 2000 } })
     setRotationSpring({ rotationSpring: [40, 0, 0], config: { easing: easeQuadInOut, duration: 2000 } })
   }
   const Stage5 = () => {
-    setPositionSpring({ positionSpring: [0, 0, -20], config: { easing: easeQuadInOut, duration: 3000 } })
+    //FormShow();
+    setPositionSpring({ positionSpring: [0, 0, -18], config: { easing: easeQuadInOut, duration: 3000 } })
     setRotationSpring({ rotationSpring: [0, 0, 0], config: { easing: easeQuadInOut, duration: 3000 } })
     setTimeout(function () {
       lock = false;
@@ -59,19 +63,27 @@ export default function useYScroll(bounds, props) {
   }
   const FormShow = () => {
     var element = document.getElementById('contact-form');
+    var element2 = document.getElementById('toptopLevel');
     element.style.opacity = '1';
+    element2.style.zIndex = '0';
     formHidden = false;
   }
   const FormHide = () => {
     var element = document.getElementById('contact-form');
+    var element2 = document.getElementById('toptopLevel');
     element.style.opacity = '0';
+    element2.style.zIndex = '-1';
     formHidden = true;
   }
 const UpStage1 = () => {
+
     lock = true;
     back2 = true;
   setPositionSpring({ positionSpring: [0, 23, 5], config: { easing: easeQuadInOut, duration: 4500 } })
   setRotationSpring({ rotationSpring: [-90, 0, 0], config: { easing: easeQuadInOut, duration: 2000 } })
+  setTimeout(function(){
+    FormHide();
+  }, 2000)
   // setTimeout(function () {
   //   setRotationSpring({ rotationSpring: [-90, 0, 0], config: { easing: easeQuadInOut, duration: 2000 } })
   // }, 2000)
@@ -83,6 +95,7 @@ const UpStage1 = () => {
   }, 4500)
 }
 const UpStage2 = () => {
+
   lock = true;
   setPositionSpring({ positionSpring: [0, -15, 5], config: { easing: easeQuadInOut, duration: 4000 } })
   setTimeout(function () {
@@ -169,12 +182,14 @@ let colors = ['#E1FFFC', '#E4E6F6', '#E9CDE0', '#DEB6C6', '#91707B'];
     // console.log("neither: ", last === y);
     // console.log("lock: ", lock);
     if(last > y && back1 && !stage3 && stage1){
-      FormHide();
+      //FormHide();
     }
     if(last < y && stage2){
-      FormShow();
+    // FormHide();
+     //FormShow();
     }
     if (!lock && !stage1 && last < y) {
+
       // scroll = clamp(scroll + (y - last) * 0.05, ...bounds)
       // setScrollSpring({ scrollSpring: scroll })
       Stage1();
@@ -182,6 +197,8 @@ let colors = ['#E1FFFC', '#E4E6F6', '#E9CDE0', '#DEB6C6', '#91707B'];
       //setTimeout(FormShow, 5000);
     }else if(!lock && stage2 && last < y && !back2 && last !== y){
       Stage4();
+     // FormHide();
+      //FormShow();
       setTimeout(Stage5, 2000);
     }else if(stage1 && stage2 && stage3 && last > y && !lock){
     UpStage1();

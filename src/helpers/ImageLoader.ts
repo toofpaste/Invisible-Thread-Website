@@ -6,6 +6,7 @@ export default class ImageLoader {
     i: number = 0;
     finished: boolean = false;
 
+
     constructor(public dataStream: Array<string>, public callback: any) {
         this.manager = new THREE.LoadingManager(this.Load, (a, b, c) => this.Progress(a, b, c), this.Error);
         dataStream.map(url => {
@@ -18,8 +19,10 @@ export default class ImageLoader {
     }
 
     onLoad(texture: THREE.Texture, materials: Array<[number, THREE.MeshLambertMaterial]>, url: string ) {
+
+
         console.log(url);
-        let mat = new THREE.MeshLambertMaterial({ map: texture, transparent: true })
+        let mat = new THREE.MeshLambertMaterial({ map: texture, transparent: true})
         mat.needsUpdate = true;
         mat.onBeforeCompile = () => {
             console.log('Load Mat');            

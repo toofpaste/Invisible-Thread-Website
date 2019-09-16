@@ -33,6 +33,7 @@ export default function ContactForm() {
 
       renderer = new CSS3DRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.domElement.id = 'toptopLevel';
       renderer.domElement.style.width = '100vw';
       renderer.domElement.style.height = '100vh';
       renderer.domElement.style.position = 'absolute'

@@ -9,6 +9,7 @@ import { GetRandom } from './HelperFuncitons'
 export function Images({ top, mouse, scrollMax, snap, imageLoader }) {
   //Load images from data.js
 
+
   const [selected, setSelected] = useState(-1);
 
   const selectImage = (key, y) => {
@@ -27,7 +28,6 @@ export function Images({ top, mouse, scrollMax, snap, imageLoader }) {
   let right = true;
   let degree = 0;
   const imageList = useMemo(() => imageLoader.materials.map(([i, material]) => {
-
     let spread = 7;
     //console.log(left, right);
     //1
@@ -53,7 +53,6 @@ export function Images({ top, mouse, scrollMax, snap, imageLoader }) {
     let rad = THREE.Math.degToRad(degree)
     let radius = 2.5;
     let x = radius * Math.cos(rad);
-    console.log(x)
     let y = -2 - (i * 2);
     let z = 4.5 + radius * Math.sin(rad);
 
